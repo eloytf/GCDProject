@@ -1,3 +1,4 @@
+setwd("z:/non-work/professionalDevelopment/dataScience/GettingData/project/")
 xtrain<-read.table("./UCI HAR Dataset/train/X_train.txt",sep="")
 ytrain<-read.table("./UCI HAR Dataset/train/Y_train.txt",sep="")
 xtest<-read.table("./UCI HAR Dataset/test/X_test.txt",sep="")

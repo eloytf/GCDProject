@@ -16,3 +16,29 @@ levmap<-read.table("./UCI HAR Dataset/activity_labels.txt")
 #Mutate labels to activity names
 ytest[,1]<-sapply(ytest[,1],function(x) levmap[grep(x,levmap[,1]),2])
 ytrain[,1]<-sapply(ytrain[,1],function(x) levmap[grep(x,levmap[,1]),2])
+
+#read features
+feat<-read.table("./UCI HAR Dataset/features.txt",sep="")
+feat<-as.data.frame(feat[,-1])
+
+
+#add names
+names(xtrain)<-as.character(feat[,1])
+names(xtest)<-as.character(feat[,1])
+
+#add categorical data
+xtest$source<-rep(factor("test"))
+xtrain$source<-rep(factor("training"))
+
+#add subject
+xtest$subject<-subtest[,1]
+xtrain$subject<-subtrain[,1]
+
+#bind dataset
+
+df<-rbind(xtrain,xtest)
+
+
+#test on small dataset
+
+smalldf<-df[sample(10299,30),]

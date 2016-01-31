@@ -10,6 +10,6 @@ Subsequently, the body linear acceleration and angular velocity were derived in 
 
 Finally a Fast Fourier Transform (FFT) was applied to some of these signals producing freqBodyAccXYZ, freqBodyAccJerkXYZ, freqBodyGyroXYZ, freqBodyAccJerkMag, freqBodyGyroMag, freqBodyGyroJerkMag. 
 
-These signals were used to estimate variables of the feature vector for each pattern. The set of variables that were estimated from these signals are the mean value and the standard deviation
+These signals were used to estimate variables of the feature vector for each pattern. The set of variables that were estimated from these signals are the mean value and the standard deviation. The mean of this variables is calculated for each subject-activity pair.
 
 The complete list of variables of each feature vector is available in 'features.txt'

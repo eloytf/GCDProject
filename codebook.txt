@@ -15,7 +15,8 @@ http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartpho
 The dataset includes the following files:
 =========================================
 
-- 'dataOutput.txt'
+- 'dataOutput.txt'  => Clean dataset
+- 'features.txt'    => List of variables
 
 Notes: 
 ======

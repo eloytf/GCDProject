@@ -22,6 +22,7 @@ feat<-read.table("./UCI HAR Dataset/features.txt",sep="")
 feat<-as.data.frame(feat[,-1])
 
 
+
 #add names
 names(xtrain)<-as.character(feat[,1])
 names(xtest)<-as.character(feat[,1])
@@ -34,11 +35,37 @@ xtrain$source<-rep(factor("training"))
 xtest$subject<-subtest[,1]
 xtrain$subject<-subtrain[,1]
 
-#bind dataset
+#add activity names (step 3)
+xtest$activity<-ytest[,1]
+xtrain$activity<-ytrain[,1]
+
+
+#bind dataset (step 1)
 
 df<-rbind(xtrain,xtest)
 
+#select only mean and standard measurements (step 2)
 
-#test on small dataset
+df<-df[,grep("(M|m)ean\\(|(S|s)td\\(|^source$|^subject$|^activity$",names(df))]
 
-smalldf<-df[sample(10299,30),]
+# change column names (step 4)
+
+names(df)<-gsub("^t","time",names(df))
+names(df)<-gsub("^f","freq",names(df))
+names(df)<-gsub("[\\(\\)]","",names(df))
+names(df)<-gsub("-([m|s])","\\U\\1",names(df),perl=TRUE)
+names(df)<-gsub("-","",names(df))
+names(df)<-gsub("Mag(.+)$","\\1Mag",names(df))
+
+
+
+#aggregate (step 5)
+
+
+
+
+library(dplyr)
+
+
+by<-group_by(df,subject,activity)
+gdf<-as.data.frame(summarize_each(by,funs(mean),-source))

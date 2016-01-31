@@ -1,4 +1,4 @@
-setwd("z:/non-work/professionalDevelopment/dataScience/GettingData/project/")
+#setwd("z:/non-work/professionalDevelopment/dataScience/GettingData/project/")
 
 #Read sets and labels
 xtrain<-read.table("./UCI HAR Dataset/train/X_train.txt",sep="")
@@ -58,6 +58,8 @@ names(df)<-gsub("-","",names(df))
 names(df)<-gsub("Mag(.+)$","\\1Mag",names(df))
 
 
+# reorder category variables to the left
+df<-df[,c(67:69,1:66)]
 
 #aggregate (step 5)
 
@@ -69,3 +71,8 @@ library(dplyr)
 
 by<-group_by(df,subject,activity)
 gdf<-as.data.frame(summarize_each(by,funs(mean),-source))
+
+
+#write table to text file
+
+write.table(gdf,file="dataOutput.txt",row.names=FALSE)
